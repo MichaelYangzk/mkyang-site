@@ -87,6 +87,17 @@
             justify-content: center;
         }
 
+        .hero::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.04;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            z-index: 10;
+        }
+
         .container {
             text-align: center;
             padding: 2rem;
@@ -119,7 +130,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            filter: drop-shadow(0 0 40px rgba(170, 190, 255, 0.15));
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.25));
             margin-bottom: 0.6rem;
             overflow: hidden;
         }
@@ -206,8 +217,9 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 50px;
             transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
         }
 
         .links a:hover {
