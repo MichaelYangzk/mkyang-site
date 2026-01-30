@@ -71,14 +71,50 @@ If all scores are 9+ say "APPROVED" at the end.`;
     throw new Error('Gemini API error: ' + JSON.stringify(json));
 }
 
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function isPlaceholder(filePath) {
+    const stats = fs.statSync(filePath);
+    // thum.io placeholder is ~660KB white page with spinner
+    // Real screenshots of dark sites are typically different sizes
+    // Also check first bytes for PNG signature + white dominant images
+    const buf = fs.readFileSync(filePath);
+    // Check if file is too small (error) or matches known placeholder size range
+    if (stats.size > 500000 && stats.size < 800000) {
+        // Could be placeholder - check for white-dominant image
+        // Simple heuristic: look for "thum.io" in raw bytes (their logo is embedded)
+        const str = buf.toString('latin1');
+        if (str.includes('thum')) return true;
+    }
+    return stats.size < 10000; // Too small = error image
+}
+
 async function main() {
     const imgPath = path.resolve(__dirname, 'screenshot.png');
+    const nonce = Date.now();
+    const screenshotUrl = `https://image.thum.io/get/width/1440/crop/900/maxAge/0/wait/10/nonce/${nonce}/${SITE_URL}?static`;
 
-    console.log('Taking screenshot of', SITE_URL, '...');
-    await download(SCREENSHOT_API, imgPath);
+    console.log('Triggering screenshot generation...');
+    await download(screenshotUrl, imgPath);
+
+    let attempt = 1;
+    const maxAttempts = 4;
+
+    while (attempt <= maxAttempts && isPlaceholder(imgPath)) {
+        const waitSec = attempt * 20;
+        console.log(`Got placeholder (attempt ${attempt}/${maxAttempts}). Waiting ${waitSec}s...`);
+        await sleep(waitSec * 1000);
+        const retryUrl = `https://image.thum.io/get/width/1440/crop/900/maxAge/0/wait/10/nonce/${nonce + attempt}/${SITE_URL}?static`;
+        await download(retryUrl, imgPath);
+        attempt++;
+    }
 
     const stats = fs.statSync(imgPath);
     console.log('Screenshot saved:', imgPath, `(${Math.round(stats.size/1024)}KB)`);
+
+    if (isPlaceholder(imgPath)) {
+        console.log('WARNING: Still got placeholder after retries. Proceeding anyway.');
+    }
 
     console.log('Sending to Gemini for review...');
     const review = await geminiReview(imgPath);
