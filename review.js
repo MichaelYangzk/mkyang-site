@@ -1,21 +1,44 @@
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
-const GEMINI_API_KEY = 'AIzaSyBZyPusEyVD65LiQr74XFX1ZfI1mm0UpHQ';
+const GEMINI_API_KEY = 'AIzaSyAf_kt_WNEMT0B7HinQqWtflXn5Fza3uYQ';
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-preview:generateContent?key=${GEMINI_API_KEY}`;
 
-async function geminiCodeReview(htmlContent) {
-    const prompt = `You are an elite web design critic from Awwwards (https://www.awwwards.com/websites/nominees/).
-Review this personal website HTML/CSS code. Visualize how it would render in a browser and evaluate it with the highest standards.
+const HEADLESS_SHELL = path.join(
+    require('os').homedir(),
+    '.cache/ms-playwright/chromium_headless_shell-1208/chrome-linux/headless_shell'
+);
+const LIB_PATH = '/tmp/chromium-deps/libs/usr/lib/aarch64-linux-gnu:/tmp/chromium-deps/libs/lib/aarch64-linux-gnu';
 
-This is a single-page personal site with:
-- Dark space background (#050510) with parallax starfield + nebula glow effects
-- Film grain noise overlay
-- Editorial serif typography (Playfair Display) with metallic gradient
-- Glassmorphism dock for social links
-- Breathing green status dot
-- Staggered entrance animations
-- Scroll indicator
+async function takeScreenshot(url) {
+    const { chromium } = require('playwright-core');
+    const screenshotPath = path.join(__dirname, 'screenshot.png');
+
+    console.log('Launching headless shell...');
+    const browser = await chromium.launch({
+        executablePath: HEADLESS_SHELL,
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
+        headless: true,
+        env: { ...process.env, LD_LIBRARY_PATH: LIB_PATH }
+    });
+
+    const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+    await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
+    await page.waitForTimeout(3000); // let animations settle
+
+    await page.screenshot({ path: screenshotPath, fullPage: false });
+    await browser.close();
+
+    console.log('Screenshot saved:', screenshotPath);
+    const base64 = fs.readFileSync(screenshotPath).toString('base64');
+    console.log('Screenshot size:', Math.round(base64.length / 1024) + 'KB base64');
+    return base64;
+}
+
+async function geminiVisionReview(imageBase64) {
+    const prompt = `You are an elite web design critic from Awwwards (https://www.awwwards.com/websites/nominees/).
+Review this screenshot of a personal website. Evaluate it with the highest standards.
 
 Rate it 1-10 on: Design, Usability, Creativity, Content.
 
@@ -35,15 +58,14 @@ IMPROVEMENTS:
 2. [specific change with exact CSS/design details]
 3. [specific change with exact CSS/design details]
 
-If all scores are 9+ say "APPROVED" at the end.
-
-Here is the full HTML:
-
-${htmlContent}`;
+If all scores are 9+ say "APPROVED" at the end.`;
 
     const body = {
         contents: [{
-            parts: [{ text: prompt }]
+            parts: [
+                { text: prompt },
+                { inlineData: { mimeType: 'image/png', data: imageBase64 } }
+            ]
         }]
     };
 
@@ -61,11 +83,13 @@ ${htmlContent}`;
 }
 
 async function main() {
-    const htmlPath = path.resolve(__dirname, 'index.html');
-    const htmlContent = fs.readFileSync(htmlPath, 'utf-8');
+    const url = process.argv[2] || 'https://mkyang.ai';
+    console.log('Taking screenshot of:', url);
 
-    console.log('Sending HTML to Gemini for code-based review...');
-    const review = await geminiCodeReview(htmlContent);
+    const base64 = await takeScreenshot(url);
+    console.log('Sending screenshot to Gemini for vision review...');
+
+    const review = await geminiVisionReview(base64);
     console.log('\n--- REVIEW ---\n');
     console.log(review);
     console.log('\n--- END REVIEW ---');
