@@ -24,7 +24,7 @@
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         /* === AMBIENT ORBS === */
@@ -156,6 +156,37 @@
             text-transform: uppercase;
             color: var(--muted);
         }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .topbar-nav a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+
+        .topbar-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .topbar-nav a:hover { color: var(--text); }
+        .topbar-nav a:hover::after { width: 100%; }
 
         .status-badge {
             display: flex;
@@ -436,9 +467,14 @@
         <!-- Top bar -->
         <header class="topbar">
             <div class="logo">mkyang.ai</div>
-            <div class="status-badge">
-                <span class="status-dot"></span>
-                Building with AI
+            <div class="topbar-right">
+                <nav class="topbar-nav">
+                    <a href="/blog/claude-code-report.html">Blog</a>
+                </nav>
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    Building with AI
+                </div>
             </div>
         </header>
 
