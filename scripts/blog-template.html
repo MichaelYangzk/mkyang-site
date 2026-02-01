@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POST_TITLE - Michael Yang</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/article.css">
+<!--
+BLOG_META
+title: POST_TITLE
+date: YYYY-MM-DD
+description: One-line summary
+tags: tag1, tag2
+bilingual: false
+END_META
+-->
+</head>
+<body>
+    <!-- Ambient background -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="grid-overlay"></div>
+    <div class="v-line"></div>
+    <div class="noise"></div>
+    <div class="vignette"></div>
+
+    <div class="page">
+        <!-- Top bar -->
+        <header class="topbar">
+            <a href="/" class="logo">mkyang.ai</a>
+            <div class="topbar-right">
+                <!-- Uncomment for bilingual posts:
+                <div class="lang-switch">
+                    <span class="lang-label active" data-lang="en">EN</span>
+                    <label class="lang-toggle">
+                        <input type="checkbox" id="langToggle">
+                        <span class="track"></span>
+                        <span class="knob"></span>
+                    </label>
+                    <span class="lang-label" data-lang="zh">中文</span>
+                </div>
+                -->
+                <a href="/blog/" class="back-link">&larr; Blog</a>
+            </div>
+        </header>
+
+        <!-- Article -->
+        <article class="article">
+            <div class="article-meta">Michael Yang &middot; MONTH YEAR</div>
+            <h1 class="article-title">POST_TITLE</h1>
+            <p class="article-subtitle">One-line subtitle or hook.</p>
+            <div class="article-rule"></div>
+
+            <div class="prose">
+                <p>Opening paragraph.</p>
+
+                <h2>Section Heading</h2>
+                <p>Section content.</p>
+
+                <div class="section-divider"></div>
+
+                <h2>Another Section</h2>
+                <p>More content.</p>
+            </div>
+
+            <!-- Footer -->
+            <footer class="article-footer">
+                <nav class="links">
+                    <a href="/">Home</a>
+                    <a href="https://github.com/MichaelYangzk" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://x.com/bayc2043" target="_blank" rel="noopener">X / Twitter</a>
+                    <a href="mailto:yangzk01@gmail.com">Email</a>
+                </nav>
+                <span class="copyright">&copy; 2025 Michael Yang</span>
+            </footer>
+        </article>
+    </div>
+
+    <!-- Uncomment for bilingual posts:
+    <script>
+        const toggle = document.getElementById('langToggle');
+        const enContent = document.getElementById('content-en');
+        const zhContent = document.getElementById('content-zh');
+        const enLabel = document.querySelector('.lang-label[data-lang="en"]');
+        const zhLabel = document.querySelector('.lang-label[data-lang="zh"]');
+
+        function setLang(lang) {
+            if (lang === 'zh') {
+                toggle.checked = true;
+                enContent.classList.remove('active');
+                zhContent.classList.add('active');
+                enLabel.classList.remove('active');
+                zhLabel.classList.add('active');
+                document.documentElement.lang = 'zh-CN';
+            } else {
+                toggle.checked = false;
+                zhContent.classList.remove('active');
+                enContent.classList.add('active');
+                zhLabel.classList.remove('active');
+                enLabel.classList.add('active');
+                document.documentElement.lang = 'en';
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        toggle.addEventListener('change', () => setLang(toggle.checked ? 'zh' : 'en'));
+        enLabel.addEventListener('click', () => setLang('en'));
+        zhLabel.addEventListener('click', () => setLang('zh'));
+    </script>
+    -->
+</body>
+</html>
