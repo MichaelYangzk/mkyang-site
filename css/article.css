@@ -194,6 +194,38 @@
 .lang-content { display: none; }
 .lang-content.active { display: block; }
 
+/* === NEXT POST === */
+.next-post {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 3rem;
+}
+
+.next-post a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.next-post a:hover {
+    color: var(--accent);
+}
+
+.next-post .next-arrow {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.next-post a:hover .next-arrow {
+    transform: translateX(3px);
+}
+
 /* === ARTICLE FOOTER === */
 .article-footer {
     border-top: 1px solid rgba(255, 255, 255, 0.06);
