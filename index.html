@@ -13,8 +13,126 @@
         /* === HOME PAGE OVERRIDES === */
         .orb-1 { opacity: 0.2; }
         .orb-2 { opacity: 0.25; }
-        .page { display: grid; grid-template-rows: auto 1fr auto; }
+        .page { display: grid; grid-template-rows: auto 1fr auto auto; min-height: 100vh; }
         .topbar-right { gap: 2rem; }
+
+        /* === PROJECTS SECTION === */
+        .projects {
+            padding: 6rem 2rem 4rem 2rem;
+        }
+
+        .projects-label {
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 2.5rem;
+        }
+
+        .project-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            padding: 2.5rem;
+            border: 1px solid rgba(240, 237, 230, 0.06);
+            border-radius: 14px;
+            background: rgba(240, 237, 230, 0.015);
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.4s ease;
+            position: relative;
+            max-width: 640px;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-card:hover {
+            border-color: rgba(201, 168, 76, 0.2);
+            background: rgba(201, 168, 76, 0.03);
+            transform: translateY(-2px);
+        }
+
+        .project-card:hover::before { opacity: 1; }
+
+        .project-logo {
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        .project-info { flex: 1; }
+
+        .project-name {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: rgba(240, 237, 230, 0.5);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .project-tag {
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            padding: 0.2rem 0.6rem;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            border-radius: 4px;
+            background: rgba(201, 168, 76, 0.05);
+        }
+
+        .project-arrow {
+            position: absolute;
+            top: 2.5rem;
+            right: 2.5rem;
+            width: 20px;
+            height: 20px;
+            color: var(--muted);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-arrow {
+            color: var(--accent);
+            transform: translate(3px, -3px);
+        }
+
+        @media (max-width: 768px) {
+            .projects { padding: 4rem 0 3rem 0; }
+            .project-card { padding: 1.8rem; gap: 1.2rem; }
+            .project-logo { width: 40px; height: 40px; }
+            .project-name { font-size: 1.2rem; }
+        }
+
+        @media (max-width: 480px) {
+            .projects { padding: 3rem 0 2rem 0; }
+            .project-card { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+            .project-arrow { top: 1.5rem; right: 1.5rem; }
+        }
 
         /* === HERO === */
         .hero {
@@ -204,10 +322,28 @@
             <p class="hero-tagline">Turning bold ideas into products that shape the future.</p>
         </main>
 
+        <!-- Projects -->
+        <section class="projects">
+            <p class="projects-label">Projects</p>
+            <a href="/agentgate" class="project-card">
+                <img src="/agentgate/logo.svg" alt="" class="project-logo">
+                <div class="project-info">
+                    <div class="project-name">AgentGate</div>
+                    <p class="project-desc">Transaction firewall & protocol abstraction layer for AI agent payments. One SDK for x402, AP2, ACP with built-in prompt injection defense.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">TypeScript</span>
+                        <span class="project-tag">Solidity</span>
+                        <span class="project-tag">Base L2</span>
+                        <span class="project-tag">Open Source</span>
+                    </div>
+                </div>
+                <svg class="project-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+        </section>
+
         <!-- Bottom bar -->
         <footer class="bottombar">
             <nav class="links">
-                <a href="/agentgate">AgentGate</a>
                 <a href="https://github.com/MichaelYangzk" target="_blank" rel="noopener">GitHub</a>
                 <a href="https://x.com/bayc2043" target="_blank" rel="noopener">X / Twitter</a>
                 <a href="mailto:yangzk01@gmail.com">Email</a>
