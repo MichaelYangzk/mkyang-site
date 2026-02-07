@@ -680,10 +680,6 @@
             padding: 0.3rem 0;
         }
 
-        .arch-layer:has(.arch-box) {
-            padding: 0.8rem 0;
-        }
-
         .arch-layer-label {
             font-size: 0.6rem;
             font-weight: 500;
@@ -703,7 +699,6 @@
             font-size: 0.78rem;
             font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
         }
 
         .arch-node.agent {
@@ -742,23 +737,6 @@
             transform: scale(1.05);
         }
 
-        .arch-connector {
-            display: flex;
-            justify-content: center;
-            padding: 0.15rem 0;
-            height: 32px;
-        }
-
-        .arch-connector-line {
-            width: 3px;
-            height: 100%;
-            opacity: 0.7;
-            background: linear-gradient(to bottom,
-                rgba(201, 168, 76, 0),
-                rgba(201, 168, 76, 0.8),
-                rgba(201, 168, 76, 0));
-        }
-
         .arch-protocols {
             display: flex;
             gap: 0.5rem;
@@ -766,68 +744,141 @@
             flex-wrap: wrap;
         }
 
-        .arch-box {
+        /* Connector: arrow lines between layers */
+        .arch-connector {
             display: flex;
-            align-items: stretch;
-            border: 1px solid rgba(201, 168, 76, 0.3);
-            border-radius: 10px;
-            overflow: hidden;
-            background: rgba(201, 168, 76, 0.03);
-            box-shadow: 0 0 12px rgba(240, 237, 230, 0.2);
-            transition: box-shadow 0.3s ease;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.25rem 0;
+            height: 36px;
         }
 
-        .arch-box:hover {
-            box-shadow: 0 0 16px rgba(240, 237, 230, 0.4);
+        .arch-connector-line {
+            width: 2px;
+            flex: 1;
         }
 
-        .arch-box-label {
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            padding: 1rem 0.6rem;
-            font-size: 0.6rem;
+        .arch-connector-line.raw {
+            background: linear-gradient(to bottom,
+                rgba(240, 237, 230, 0.1),
+                rgba(240, 237, 230, 0.3));
+        }
+
+        .arch-connector-line.processed {
+            background: linear-gradient(to bottom,
+                rgba(201, 168, 76, 0.5),
+                rgba(74, 222, 128, 0.4));
+        }
+
+        .arch-connector-arrow {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+        }
+
+        .arch-connector-arrow.raw {
+            border-top: 6px solid rgba(240, 237, 230, 0.3);
+        }
+
+        .arch-connector-arrow.processed {
+            border-top: 6px solid rgba(201, 168, 76, 0.5);
+        }
+
+        /* PaySentry control plane - glassmorphism hero */
+        .arch-paysentry-layer {
+            padding: 1rem 0;
+            width: 100%;
+        }
+
+        .arch-paysentry-title {
+            text-align: center;
+            font-size: 0.65rem;
             font-weight: 600;
             letter-spacing: 0.25em;
             text-transform: uppercase;
             color: var(--accent);
-            background: rgba(201, 168, 76, 0.06);
-            border-right: 1px solid rgba(201, 168, 76, 0.15);
+            margin-bottom: 0.6rem;
+        }
+
+        .arch-paysentry-box {
+            border: 1px solid rgba(201, 168, 76, 0.35);
+            border-radius: 14px;
+            background: rgba(201, 168, 76, 0.04);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow:
+                0 0 20px rgba(201, 168, 76, 0.12),
+                0 0 60px rgba(201, 168, 76, 0.05),
+                inset 0 1px 0 rgba(201, 168, 76, 0.1);
+            padding: 1.2rem 1rem;
+            transition: all 0.4s ease;
+        }
+
+        .arch-paysentry-box:hover {
+            border-color: rgba(201, 168, 76, 0.5);
+            box-shadow:
+                0 0 30px rgba(201, 168, 76, 0.2),
+                0 0 80px rgba(201, 168, 76, 0.08),
+                inset 0 1px 0 rgba(201, 168, 76, 0.15);
+        }
+
+        /* Pipeline: horizontal flow inside PaySentry */
+        .arch-pipeline {
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .arch-box-items {
-            display: flex;
             gap: 0;
+        }
+
+        .arch-pillar {
             flex: 1;
-        }
-
-        .arch-box-item {
-            flex: 1;
-            padding: 0.8rem 1rem;
-            text-align: center;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: rgba(240, 237, 230, 0.6);
-            border-right: 1px solid rgba(201, 168, 76, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .arch-box-item:last-child {
-            border-right: none;
-        }
-
-        .arch-box-item:hover {
-            background: rgba(201, 168, 76, 0.06);
-            color: var(--accent);
-        }
-
-        .arch-protocols {
             display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.6rem 0.5rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .arch-pillar:hover {
+            background: rgba(201, 168, 76, 0.06);
+        }
+
+        .arch-pillar-icon {
+            width: 28px;
+            height: 28px;
+            margin-bottom: 0.4rem;
+            opacity: 0.7;
+        }
+
+        .arch-pillar:hover .arch-pillar-icon {
+            opacity: 1;
+        }
+
+        .arch-pillar-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: rgba(240, 237, 230, 0.8);
+            margin-bottom: 0.2rem;
+        }
+
+        .arch-pillar-desc {
+            font-size: 0.55rem;
+            color: rgba(240, 237, 230, 0.35);
+            line-height: 1.3;
+        }
+
+        /* Arrow between pillars */
+        .arch-flow-arrow {
+            display: flex;
+            align-items: center;
+            padding: 0 0.15rem;
+            color: rgba(201, 168, 76, 0.3);
+            font-size: 0.7rem;
+            flex-shrink: 0;
         }
 
         /* === PACKAGES SECTION === */
@@ -1196,22 +1247,59 @@ console.<span class="fn">log</span>(stats.<span class="prop">totalSpend</span>, 
                     </div>
                 </div>
 
-                <div class="arch-connector"><div class="arch-connector-line"></div></div>
+                <!-- Raw request flow (gray) -->
+                <div class="arch-connector">
+                    <div class="arch-connector-line raw"></div>
+                    <div class="arch-connector-arrow raw"></div>
+                </div>
 
                 <!-- Layer 2: PaySentry Control Plane -->
-                <div class="arch-layer">
-                    <div class="arch-box">
-                        <div class="arch-box-label">PaySentry</div>
-                        <div class="arch-box-items">
-                            <div class="arch-box-item">Observe</div>
-                            <div class="arch-box-item">Control</div>
-                            <div class="arch-box-item">Protect</div>
-                            <div class="arch-box-item">Test</div>
+                <div class="arch-paysentry-layer">
+                    <div class="arch-paysentry-title">PaySentry Control Plane</div>
+                    <div class="arch-paysentry-box">
+                        <div class="arch-pipeline">
+                            <div class="arch-pillar">
+                                <svg class="arch-pillar-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                                </svg>
+                                <div class="arch-pillar-name">Observe</div>
+                                <div class="arch-pillar-desc">Track spend</div>
+                            </div>
+                            <div class="arch-flow-arrow">&rsaquo;</div>
+                            <div class="arch-pillar">
+                                <svg class="arch-pillar-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                                </svg>
+                                <div class="arch-pillar-name">Control</div>
+                                <div class="arch-pillar-desc">Enforce policy</div>
+                            </div>
+                            <div class="arch-flow-arrow">&rsaquo;</div>
+                            <div class="arch-pillar">
+                                <svg class="arch-pillar-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                </svg>
+                                <div class="arch-pillar-name">Protect</div>
+                                <div class="arch-pillar-desc">Fraud check</div>
+                            </div>
+                            <div class="arch-flow-arrow">&rsaquo;</div>
+                            <div class="arch-pillar">
+                                <svg class="arch-pillar-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.6-3.6a8 8 0 01-11.5 11.5L3.4 23.6a1 1 0 01-1.4 0l-1.6-1.6a1 1 0 010-1.4l6.3-6.3A8 8 0 0114.7 6.3z"/>
+                                    <path d="M8 14l-2 2"/><path d="M12 10l-2 2"/>
+                                </svg>
+                                <div class="arch-pillar-name">Test</div>
+                                <div class="arch-pillar-desc">Sandbox</div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="arch-connector"><div class="arch-connector-line"></div></div>
+                <!-- Processed/verified flow (gold) -->
+                <div class="arch-connector">
+                    <div class="arch-connector-arrow processed" style="transform: rotate(0)"></div>
+                    <div class="arch-connector-line processed"></div>
+                    <div class="arch-connector-arrow processed"></div>
+                </div>
 
                 <!-- Layer 3: Payment Protocols -->
                 <div class="arch-layer">
@@ -1224,7 +1312,11 @@ console.<span class="fn">log</span>(stats.<span class="prop">totalSpend</span>, 
                     </div>
                 </div>
 
-                <div class="arch-connector"><div class="arch-connector-line"></div></div>
+                <!-- Settlement flow (green/blue gradient) -->
+                <div class="arch-connector">
+                    <div class="arch-connector-line processed"></div>
+                    <div class="arch-connector-arrow processed"></div>
+                </div>
 
                 <!-- Layer 4: Settlement -->
                 <div class="arch-layer">
