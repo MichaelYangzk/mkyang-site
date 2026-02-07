@@ -664,118 +664,94 @@
         /* === ARCHITECTURE SECTION === */
         .arch-diagram {
             margin-top: 3rem;
-            padding: 2.5rem;
+            padding: 2.5rem 2rem;
             border: 1px solid rgba(240, 237, 230, 0.06);
             border-radius: 12px;
             background: rgba(8, 8, 10, 0.6);
-            overflow-x: auto;
-            position: relative;
-        }
-
-        .arch-svg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .arch-svg line {
-            stroke: url(#lineGrad);
-            stroke-width: 1.5;
-            opacity: 0.6;
-        }
-
-        .arch-layer-label {
-            font-size: 0.55rem;
-            font-weight: 500;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: rgba(240, 237, 230, 0.2);
-            text-align: center;
-            margin-bottom: 0.4rem;
         }
 
         .arch-layer {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 0.6rem 0;
-            position: relative;
-            z-index: 1;
+            padding: 0.3rem 0;
+        }
+
+        .arch-layer-label {
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(240, 237, 230, 0.3);
+            margin-bottom: 0.6rem;
         }
 
         .arch-node {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.7rem 1.4rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 8px;
             white-space: nowrap;
             font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 500;
+            transition: all 0.3s ease;
         }
 
         .arch-node.agent {
-            background: rgba(240, 237, 230, 0.05);
-            border: 1px solid rgba(240, 237, 230, 0.12);
-            color: rgba(240, 237, 230, 0.7);
+            background: rgba(240, 237, 230, 0.04);
+            border: 1px solid rgba(240, 237, 230, 0.1);
+            color: rgba(240, 237, 230, 0.6);
         }
 
-        .arch-node.control-plane {
-            background: rgba(201, 168, 76, 0.06);
-            border: 1px solid rgba(201, 168, 76, 0.25);
-            color: var(--accent);
+        .arch-node.agent:hover {
+            border-color: rgba(240, 237, 230, 0.25);
+            color: rgba(240, 237, 230, 0.9);
         }
 
         .arch-node.protocol {
-            background: rgba(74, 222, 128, 0.06);
-            border: 1px solid rgba(74, 222, 128, 0.25);
+            background: rgba(74, 222, 128, 0.05);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            color: rgba(74, 222, 128, 0.7);
+        }
+
+        .arch-node.protocol:hover {
+            border-color: rgba(74, 222, 128, 0.4);
             color: #4ade80;
         }
 
         .arch-node.settlement {
-            background: rgba(129, 140, 248, 0.06);
-            border: 1px solid rgba(129, 140, 248, 0.25);
+            background: rgba(129, 140, 248, 0.05);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            color: rgba(129, 140, 248, 0.7);
+        }
+
+        .arch-node.settlement:hover {
+            border-color: rgba(129, 140, 248, 0.4);
             color: #818cf8;
         }
 
         .arch-connector {
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 0;
-            height: 36px;
-            position: relative;
-            z-index: 1;
+            padding: 0.15rem 0;
+            height: 32px;
         }
 
-        .arch-connector::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 8px;
-            width: 2px;
-            background: linear-gradient(to bottom, rgba(201, 168, 76, 0.4), rgba(201, 168, 76, 0.2));
-            transform: translateX(-50%);
+        .arch-connector-line {
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom,
+                rgba(201, 168, 76, 0),
+                rgba(201, 168, 76, 0.3),
+                rgba(201, 168, 76, 0));
         }
 
-        .arch-connector::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: 2px;
-            width: 0;
-            height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 6px solid rgba(201, 168, 76, 0.35);
-            transform: translateX(-50%);
+        .arch-protocols {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .arch-box {
@@ -1192,35 +1168,20 @@ console.<span class="fn">log</span>(stats.<span class="prop">totalSpend</span>, 
             </p>
 
             <div class="arch-diagram">
-                <!-- SVG Flow Lines (positioned absolutely behind everything) -->
-                <svg class="arch-svg" id="archSvg" aria-hidden="true">
-                    <defs>
-                        <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="rgba(201,168,76,0.1)" />
-                            <stop offset="50%" stop-color="rgba(201,168,76,0.35)" />
-                            <stop offset="100%" stop-color="rgba(201,168,76,0.1)" />
-                        </linearGradient>
-                        <marker id="arrowDown" markerWidth="8" markerHeight="6" refX="4" refY="6" orient="auto">
-                            <path d="M0,0 L4,6 L8,0" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
-                        </marker>
-                    </defs>
-                </svg>
-
                 <!-- Layer 1: Agent Frameworks -->
-                <div class="arch-layer" data-layer="agents">
+                <div class="arch-layer">
                     <div class="arch-layer-label">Your Agents</div>
                     <div class="arch-protocols">
-                        <div class="arch-node agent" data-node="agent">LangChain</div>
-                        <div class="arch-node agent" data-node="agent">CrewAI</div>
-                        <div class="arch-node agent" data-node="agent">AutoGen</div>
+                        <div class="arch-node agent">LangChain</div>
+                        <div class="arch-node agent">CrewAI</div>
+                        <div class="arch-node agent">AutoGen</div>
                     </div>
                 </div>
 
-                <!-- Connector 1→2 -->
-                <div class="arch-connector"></div>
+                <div class="arch-connector"><div class="arch-connector-line"></div></div>
 
                 <!-- Layer 2: PaySentry Control Plane -->
-                <div class="arch-layer" data-layer="paysentry">
+                <div class="arch-layer">
                     <div class="arch-box">
                         <div class="arch-box-label">PaySentry</div>
                         <div class="arch-box-items">
@@ -1232,31 +1193,29 @@ console.<span class="fn">log</span>(stats.<span class="prop">totalSpend</span>, 
                     </div>
                 </div>
 
-                <!-- Connector 2→3 -->
-                <div class="arch-connector"></div>
+                <div class="arch-connector"><div class="arch-connector-line"></div></div>
 
                 <!-- Layer 3: Payment Protocols -->
-                <div class="arch-layer" data-layer="protocols">
+                <div class="arch-layer">
                     <div class="arch-layer-label">Protocols</div>
                     <div class="arch-protocols">
-                        <div class="arch-node protocol" data-node="proto">x402</div>
-                        <div class="arch-node protocol" data-node="proto">ACP</div>
-                        <div class="arch-node protocol" data-node="proto">AP2</div>
-                        <div class="arch-node protocol" data-node="proto">Visa TAP</div>
+                        <div class="arch-node protocol">x402</div>
+                        <div class="arch-node protocol">ACP</div>
+                        <div class="arch-node protocol">AP2</div>
+                        <div class="arch-node protocol">Visa TAP</div>
                     </div>
                 </div>
 
-                <!-- Connector 3→4 -->
-                <div class="arch-connector"></div>
+                <div class="arch-connector"><div class="arch-connector-line"></div></div>
 
                 <!-- Layer 4: Settlement -->
-                <div class="arch-layer" data-layer="settlement">
+                <div class="arch-layer">
                     <div class="arch-layer-label">Settlement</div>
                     <div class="arch-protocols">
-                        <div class="arch-node settlement" data-node="settle">Stripe</div>
-                        <div class="arch-node settlement" data-node="settle">Circle</div>
-                        <div class="arch-node settlement" data-node="settle">Coinbase</div>
-                        <div class="arch-node settlement" data-node="settle">Banks</div>
+                        <div class="arch-node settlement">Stripe</div>
+                        <div class="arch-node settlement">Circle</div>
+                        <div class="arch-node settlement">Coinbase</div>
+                        <div class="arch-node settlement">Banks</div>
                     </div>
                 </div>
             </div>
@@ -1356,61 +1315,6 @@ console.<span class="fn">log</span>(stats.<span class="prop">totalSpend</span>, 
             });
         }
 
-        // Draw SVG flow lines between architecture layers
-        function drawArchLines() {
-            const svg = document.getElementById('archSvg');
-            if (!svg) return;
-            const diagram = svg.parentElement;
-            const rect = diagram.getBoundingClientRect();
-
-            // Clear existing lines
-            svg.querySelectorAll('line').forEach(l => l.remove());
-
-            const agents = diagram.querySelectorAll('[data-layer="agents"] [data-node]');
-            const psBox = diagram.querySelector('[data-layer="paysentry"] .arch-box');
-            const protos = diagram.querySelectorAll('[data-layer="protocols"] [data-node]');
-            const settles = diagram.querySelectorAll('[data-layer="settlement"] [data-node]');
-
-            function midX(el) { const r = el.getBoundingClientRect(); return r.left + r.width/2 - rect.left; }
-            function botY(el) { return el.getBoundingClientRect().bottom - rect.top; }
-            function topY(el) { return el.getBoundingClientRect().top - rect.top; }
-
-            function addLine(x1, y1, x2, y2, opacity) {
-                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                line.setAttribute('x1', x1);
-                line.setAttribute('y1', y1);
-                line.setAttribute('x2', x2);
-                line.setAttribute('y2', y2);
-                if (opacity) line.style.opacity = opacity;
-                svg.appendChild(line);
-            }
-
-            if (!psBox) return;
-            const psTop = topY(psBox);
-            const psBot = botY(psBox);
-            const psMidX = midX(psBox);
-
-            // Agent nodes → PaySentry top
-            agents.forEach(a => {
-                addLine(midX(a), botY(a) + 2, psMidX, psTop - 2, '0.4');
-            });
-
-            // PaySentry bottom → Protocol nodes
-            protos.forEach(p => {
-                addLine(psMidX, psBot + 2, midX(p), topY(p) - 2, '0.4');
-            });
-
-            // Protocol nodes → Settlement nodes (many-to-many, subtle)
-            protos.forEach(p => {
-                settles.forEach(s => {
-                    addLine(midX(p), botY(p) + 2, midX(s), topY(s) - 2, '0.08');
-                });
-            });
-        }
-
-        // Draw on load and resize
-        window.addEventListener('load', () => setTimeout(drawArchLines, 300));
-        window.addEventListener('resize', drawArchLines);
     </script>
 </body>
 </html>
