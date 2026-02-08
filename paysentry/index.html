@@ -1260,6 +1260,83 @@
             .code-body pre { font-size: 0.72rem; }
         }
     </style>
+
+    <!-- GEO: JSON-LD Structured Data for AI Search Engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "PaySentry",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Cross-platform",
+      "description": "Open-source control plane for AI agent payments. Observe, control, and protect autonomous spending across x402, ACP, AP2, and Visa TAP protocols.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Michael Yang",
+        "url": "https://mkyang.ai"
+      },
+      "softwareVersion": "1.0.2",
+      "datePublished": "2026-02-01",
+      "downloadUrl": "https://www.npmjs.com/package/@paysentry/core",
+      "codeRepository": "https://github.com/mkmkkkkk/paysentry",
+      "programmingLanguage": "TypeScript",
+      "license": "https://opensource.org/licenses/MIT"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is PaySentry?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "PaySentry is an open-source control plane that sits between AI agents and payment protocols (x402, ACP, AP2, Visa TAP), providing real-time spending monitoring, declarative policy enforcement, and automated dispute resolution for autonomous agent transactions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I add spending limits to x402 payments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Install @paysentry/control and use the PolicyEngine: loadPolicy with blockAbove(1000, 'USDC') for hard limits, requireApprovalAbove(100, 'USDC') for human-in-the-loop, and daily/monthly budget caps. The engine evaluates every transaction before it settles."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does PaySentry prevent prompt injection attacks on agent wallets?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "PaySentry enforces deterministic policies written in code, not prompts. Even if an AI agent is compromised via prompt injection, the PolicyEngine evaluates transactions before funds move and blocks unauthorized payments based on allowlists, budget caps, and approval chains."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does PaySentry work with all agent payment protocols?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. PaySentry supports x402 (HTTP 402), ACP (Agent Commerce Protocol), AP2 (Agents to Payments), and Visa TAP (Trusted Agent Protocol). The @paysentry/x402 adapter provides drop-in lifecycle hooks for x402 servers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is PaySentry open source?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. PaySentry is MIT-licensed and available on GitHub. All 6 packages are published to npm under the @paysentry scope with 79 tests and a full E2E example."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
     <!-- Ambient background -->
@@ -1286,6 +1363,10 @@
         <section class="hero">
             <div class="hero-badge">Agent Payment Control Plane</div>
             <h1 class="hero-title">Pay<span class="accent">Sentry</span></h1>
+            <!-- GEO: Answer Capsule — 72% of AI-cited pages have this pattern -->
+            <p style="font-size: 1rem; color: var(--muted); max-width: 640px; margin: 0.75rem auto 0; line-height: 1.6;">
+                PaySentry is an open-source payment control plane that sits between AI agents and their wallets, enforcing spending limits, circuit breakers, and audit trails across x402, ACP, AP2, and Visa TAP protocols. 79 tests. 6 npm packages. MIT licensed.
+            </p>
             <p class="hero-tagline">
                 The missing control plane for AI agent payments. Observe what agents spend. Control how they spend it. Protect when things go wrong.
             </p>
