@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why I Built an Information Antenna - Michael Yang</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/article.css">
+    <link rel="alternate" type="application/rss+xml" title="Michael Yang's Blog" href="/feed.xml">
+<!--
+BLOG_META
+title: Why I Built an Information Antenna
+date: 2026-02-12
+description: Most people monitor 5 sources. I built a system that monitors 100+ and tells me what everyone else is missing.
+tags: engineering, information, strategy
+bilingual: false
+END_META
+-->
+</head>
+<body>
+    <!-- Ambient background -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="grid-overlay"></div>
+    <div class="v-line"></div>
+    <div class="noise"></div>
+    <div class="vignette"></div>
+
+    <div class="page">
+        <!-- Top bar -->
+        <header class="topbar">
+            <a href="/" class="logo">mkyang.ai</a>
+            <div class="topbar-right">
+                <a href="/blog/" class="back-link">&larr; Blog</a>
+            </div>
+        </header>
+
+        <!-- Article -->
+        <article class="article">
+            <div class="article-meta">Michael Yang &middot; February 2026</div>
+            <h1 class="article-title">Why I Built an Information Antenna</h1>
+            <p class="article-subtitle">The problem with getting your worldview from 5 sources.</p>
+            <div class="article-rule"></div>
+
+            <div class="prose">
+
+                <p>I used to scrape Reddit. A few subreddits, some keyword filters, maybe HN on top. It worked for a while. Then I realized something uncomfortable: <strong>I was building my entire understanding of the world from what a very specific group of people chose to upvote.</strong></p>
+
+                <p>Reddit is great at surfacing consensus opinions within its own population. But that's exactly the problem. When your information diet comes from a handful of curated communities, you don't get the full picture &mdash; you get the picture that a particular tribe agreed on. You miss the signal that's sitting in an SEC filing, a patent application, a niche academic preprint, or a government dataset that nobody on Reddit is talking about.</p>
+
+                <h2>The Idea</h2>
+
+                <p>The essence of business &mdash; of good decision-making in general &mdash; is finding information asymmetry. Knowing something that most people don't know yet, and acting on it before the window closes.</p>
+
+                <p>So I asked myself: what if instead of scraping 5 sources really well, I built a system that listens to <strong>100+ sources across every corner of the internet</strong>? Not just social media. Government filings. Dark pool data. Patent offices. Academic preprints. Package registries. Consumer demand signals. Climate data. Flight tracking. All of it.</p>
+
+                <p>The goal isn't to read all of this myself. That's impossible. The goal is to build a pipeline that collects everything, mathematically filters the noise, and surfaces only the moments where <strong>something unusual is happening that most people haven't noticed yet</strong>.</p>
+
+                <h2>Why Breadth Beats Depth</h2>
+
+                <p>When you monitor only Reddit and Twitter, you're seeing what 100K+ people have already seen. By definition, there's no information edge there. But when a niche government dataset shows an anomaly and a specialized industry source corroborates it &mdash; while mainstream platforms are silent &mdash; that's a window. That's the gap between "a few hundred people know" and "everyone knows."</p>
+
+                <p>The system I built tiers every source by how many eyeballs are on it. A FINRA dark pool report is Tier 1 &mdash; maybe a few hundred analysts read it. A Reddit front page post is Tier 3 &mdash; millions see it. When Tier 1 sources light up and Tier 3 is quiet, you're looking at genuine information asymmetry.</p>
+
+                <h2>A System That Evolves</h2>
+
+                <p>The most interesting property of this pipeline is that it gets better the more I use it. Every time I realize I'm missing a perspective, I add a new source. Every false positive teaches the noise filter what to ignore. Every confirmed signal reinforces the patterns worth watching.</p>
+
+                <p>It started with 30 scrapers. Now it's past 100. The architecture is designed so adding a new source is trivial &mdash; the system auto-discovers it and integrates it into the full processing pipeline. The more I invest in it, the wider my antenna becomes, and the harder it is for important signals to slip through undetected.</p>
+
+                <div class="section-divider"></div>
+
+                <p>Most tools try to help you process information faster. This one helps me <strong>see information that others aren't looking at in the first place</strong>. That's the difference between efficiency and edge.</p>
+
+                <p>I'm not trying to build the next Bloomberg terminal. I'm building a personal listening system that ensures I'm never the last to know &mdash; about anything.</p>
+
+            </div>
+
+            <!-- Footer -->
+            <footer class="article-footer">
+                <nav class="links">
+                    <a href="/">Home</a>
+                    <a href="https://github.com/mkmkkkkk" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://x.com/bayc2043" target="_blank" rel="noopener">X / Twitter</a>
+                    <a href="mailto:yangzk01@gmail.com">Email</a>
+                </nav>
+                <span class="copyright">&copy; 2025 Michael Yang</span>
+            </footer>
+        </article>
+    </div>
+</body>
+</html>
