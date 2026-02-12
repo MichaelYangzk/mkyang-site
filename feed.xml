@@ -8,7 +8,7 @@
     <description>Thoughts on AI, building products, and the future of work.</description>
     <language>en</language>
     <managingEditor>yangzk2001@gmail.com (Michael Yang)</managingEditor>
-    <lastBuildDate>Thu, 12 Feb 2026 18:01:34 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 12 Feb 2026 18:11:36 GMT</lastBuildDate>
     <atom:link href="https://mkyang.ai/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://mkyang.ai/favicon.svg</url>
@@ -22,43 +22,88 @@
       <pubDate>Thu, 12 Feb 2026 00:00:00 GMT</pubDate>
       <author>yangzk2001@gmail.com (Michael Yang)</author>
       <description>Most people monitor 5 sources. I built a system that monitors 100+ and tells me what everyone else is missing.</description>
-      <content:encoded><![CDATA[<div class="article-meta">Michael Yang &middot; February 2026</div>
-            <h1 class="article-title">Why I Built an Information Antenna</h1>
-            <p class="article-subtitle">The problem with getting your worldview from 5 sources.</p>
-            <div class="article-rule"></div>
+      <content:encoded><![CDATA[<!-- ==================== ENGLISH ==================== -->
+            <div class="lang-content active" id="content-en">
+                <div class="article-meta">Michael Yang &middot; February 12, 2026</div>
+                <h1 class="article-title">Why I Built an Information Antenna</h1>
+                <p class="article-subtitle">The problem with getting your worldview from five sources.</p>
+                <div class="article-rule"></div>
 
-            <div class="prose">
+                <div class="prose">
+                    <p>I used to scrape Reddit. A handful of subreddits, some keyword filters, Hacker News on top. It worked &mdash; until I realized something uncomfortable: <strong>I was building my entire understanding of the world from what one very specific group of people chose to upvote.</strong></p>
 
-                <p>I used to scrape Reddit. A few subreddits, some keyword filters, maybe HN on top. It worked for a while. Then I realized something uncomfortable: <strong>I was building my entire understanding of the world from what a very specific group of people chose to upvote.</strong></p>
+                    <p>Reddit is excellent at surfacing consensus opinions within its own population. But that is precisely the problem. When your information diet comes from a handful of curated communities, you don&rsquo;t get the full picture. You get the picture that a particular tribe agreed on. Meanwhile, the signal sitting in an SEC filing, a patent application, a niche academic preprint, or a government dataset that nobody on Reddit is talking about &mdash; that signal goes unheard.</p>
 
-                <p>Reddit is great at surfacing consensus opinions within its own population. But that's exactly the problem. When your information diet comes from a handful of curated communities, you don't get the full picture &mdash; you get the picture that a particular tribe agreed on. You miss the signal that's sitting in an SEC filing, a patent application, a niche academic preprint, or a government dataset that nobody on Reddit is talking about.</p>
+                    <h2>The Core Idea</h2>
 
-                <h2>The Idea</h2>
+                    <p>The essence of business &mdash; of good decision-making in general &mdash; is finding information asymmetry: knowing something that most people don&rsquo;t know yet, and acting on it before the window closes.</p>
 
-                <p>The essence of business &mdash; of good decision-making in general &mdash; is finding information asymmetry. Knowing something that most people don't know yet, and acting on it before the window closes.</p>
+                    <p>So I asked a simple question: what if, instead of scraping five sources really well, I built a system that listens to <strong>a hundred sources across every corner of the internet</strong>? Not just social media. Government filings. Dark pool trading data. Patent offices. Academic preprints. Software package registries. Consumer demand signals. Climate data. Flight tracking. All of it.</p>
 
-                <p>So I asked myself: what if instead of scraping 5 sources really well, I built a system that listens to <strong>100+ sources across every corner of the internet</strong>? Not just social media. Government filings. Dark pool data. Patent offices. Academic preprints. Package registries. Consumer demand signals. Climate data. Flight tracking. All of it.</p>
+                    <p>The goal is not to read all of this myself &mdash; that would be impossible. The goal is to build a pipeline that collects broadly, filters mathematically, and surfaces only the moments where <strong>something unusual is happening that most people haven&rsquo;t noticed yet</strong>.</p>
 
-                <p>The goal isn't to read all of this myself. That's impossible. The goal is to build a pipeline that collects everything, mathematically filters the noise, and surfaces only the moments where <strong>something unusual is happening that most people haven't noticed yet</strong>.</p>
+                    <h2>Why Breadth Beats Depth</h2>
 
-                <h2>Why Breadth Beats Depth</h2>
+                    <p>When you monitor only Reddit and Twitter, you are seeing what hundreds of thousands of people have already seen. By definition, there is no information edge there.</p>
 
-                <p>When you monitor only Reddit and Twitter, you're seeing what 100K+ people have already seen. By definition, there's no information edge there. But when a niche government dataset shows an anomaly and a specialized industry source corroborates it &mdash; while mainstream platforms are silent &mdash; that's a window. That's the gap between "a few hundred people know" and "everyone knows."</p>
+                    <p>But when a niche government dataset flags an anomaly, and a specialized industry source corroborates it, while mainstream platforms remain silent &mdash; that gap is the window. That is the space between &ldquo;a few hundred people know&rdquo; and &ldquo;everyone knows.&rdquo;</p>
 
-                <p>The system I built tiers every source by how many eyeballs are on it. A FINRA dark pool report is Tier 1 &mdash; maybe a few hundred analysts read it. A Reddit front page post is Tier 3 &mdash; millions see it. When Tier 1 sources light up and Tier 3 is quiet, you're looking at genuine information asymmetry.</p>
+                    <p>My system tiers every source by how many eyeballs are on it. A FINRA dark pool report might be read by a few hundred analysts &mdash; that is Tier 1. A Reddit front-page post is seen by millions &mdash; that is Tier 3. When Tier 1 sources light up and Tier 3 stays quiet, you are looking at genuine information asymmetry.</p>
 
-                <h2>A System That Evolves</h2>
+                    <h2>A System That Evolves</h2>
 
-                <p>The most interesting property of this pipeline is that it gets better the more I use it. Every time I realize I'm missing a perspective, I add a new source. Every false positive teaches the noise filter what to ignore. Every confirmed signal reinforces the patterns worth watching.</p>
+                    <p>The most interesting property of this pipeline is that <strong>it gets better the more I use it</strong>. Every time I realize I am missing a perspective, I add a new source. Every false positive teaches the noise filter what to ignore. Every confirmed signal reinforces the patterns worth watching.</p>
 
-                <p>It started with 30 scrapers. Now it's past 100. The architecture is designed so adding a new source is trivial &mdash; the system auto-discovers it and integrates it into the full processing pipeline. The more I invest in it, the wider my antenna becomes, and the harder it is for important signals to slip through undetected.</p>
+                    <p>It started with about thirty scrapers. Now it is past a hundred. The architecture is designed so that adding a new source is trivial &mdash; the system auto-discovers it and integrates it into the full processing pipeline. The more I invest in it, the wider the antenna becomes, and the harder it is for important signals to slip through undetected.</p>
 
-                <div class="section-divider"></div>
+                    <div class="section-divider"></div>
 
-                <p>Most tools try to help you process information faster. This one helps me <strong>see information that others aren't looking at in the first place</strong>. That's the difference between efficiency and edge.</p>
+                    <p>Most tools try to help you process information faster. This one helps me <strong>see information that others are not looking at in the first place</strong>. That is the difference between efficiency and edge.</p>
 
-                <p>I'm not trying to build the next Bloomberg terminal. I'm building a personal listening system that ensures I'm never the last to know &mdash; about anything.</p>
+                    <p>I am not building the next Bloomberg terminal. I am building a personal listening system that ensures I am never the last to know.</p>
+                </div>
+            </div>
 
+            <!-- ==================== CHINESE ==================== -->
+            <div class="lang-content" id="content-zh">
+                <div class="article-meta">Michael Yang &middot; 2026 年 2 月 12 日</div>
+                <h1 class="article-title">为什么我造了一根「收音天线」</h1>
+                <p class="article-subtitle">靠五个信息源理解世界，够吗？</p>
+                <div class="article-rule"></div>
+
+                <div class="prose">
+                    <p>我以前靠爬 Reddit 获取信息。几个 subreddit，一些关键词过滤，再加上 Hacker News。这套方案用了挺久 &mdash; 直到我意识到一个让人不太舒服的事实：<strong>我对世界的整个认知，建立在一群特定人群选择点赞的内容上。</strong></p>
+
+                    <p>Reddit 非常擅长在它自己的用户群体内浮现共识观点。但这恰恰就是问题所在。当你的信息来源只有几个精心挑选的社区，你看到的不是全貌 &mdash; 你看到的是某个特定群体达成共识后的画面。与此同时，那些藏在 SEC 文件、专利申请、小众学术预印本、或者 Reddit 上根本没人讨论的政府数据集里的信号，就这么被错过了。</p>
+
+                    <h2>核心思路</h2>
+
+                    <p>商业的本质 &mdash; 或者说一切好决策的本质 &mdash; 是找到信息不对称：你知道一件大多数人还不知道的事，并且在窗口关闭之前采取行动。</p>
+
+                    <p>所以我问了自己一个简单的问题：与其把五个信息源爬得很精，不如造一个系统，<strong>同时监听互联网每个角落的上百个信息源</strong>？不只是社交媒体。还有政府公开文件、暗池交易数据、专利局、学术预印本、软件包注册表、消费需求信号、气候数据、航班追踪。所有这些。</p>
+
+                    <p>目标不是让我自己去读这些东西 &mdash; 那不可能。目标是搭建一条流水线：广泛采集，数学去噪，只把<strong>「正在发生什么异常、而大多数人还没注意到」</strong>的时刻推到我面前。</p>
+
+                    <h2>为什么广度比深度重要</h2>
+
+                    <p>只盯着 Reddit 和 Twitter 的时候，你看到的是几十万人已经看过的东西。这里面没有信息差。</p>
+
+                    <p>但当一个小众的政府数据集出现异常，一个专业行业信息源佐证了同样的方向，而主流平台上一片安静 &mdash; 这个差距就是窗口。这就是「几百人知道」和「所有人都知道」之间的空间。</p>
+
+                    <p>我的系统把每个信息源按「有多少双眼睛在看」分层。FINRA 暗池报告可能只有几百个分析师在读，这是 Tier 1。Reddit 首页帖子有几百万人看到，这是 Tier 3。当 Tier 1 的源亮灯了，Tier 3 还安静着 &mdash; 这就是真正的信息不对称。</p>
+
+                    <h2>一个会自我进化的系统</h2>
+
+                    <p>这条流水线最有意思的特性是：<strong>用得越多，它就越强</strong>。每次我发现某个视角缺失，就加一个新的信息源。每个误报都教会过滤器什么该忽略。每个被验证的信号都强化了值得关注的模式。</p>
+
+                    <p>它从大约三十个爬虫起步，现在已经超过一百个。架构上，新增一个信息源几乎零成本 &mdash; 系统会自动发现并将其接入完整的处理流水线。投入越多，天线越宽，重要信号越难逃过检测。</p>
+
+                    <div class="section-divider"></div>
+
+                    <p>大部分工具帮你更快地处理信息。这个系统帮我<strong>看到别人根本没在看的信息</strong>。这是效率和信息差之间的区别。</p>
+
+                    <p>我不是在做下一个彭博终端。我在做一个私人收音系统，确保我永远不是最后一个知道的人。</p>
+                </div>
             </div>
 
             <!-- Footer -->]]></content:encoded>
